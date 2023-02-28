@@ -122,7 +122,9 @@ export function injectPositive(values: number[]): number[] {
             (currentTotal: number, num: number) => currentTotal + num,
             0
         );
-        values.push(sum);
+        const new_values = [...values];
+        new_values.push(sum);
+        return new_values;
     } else {
         const new_list = values.filter(
             (value: number): boolean => values.indexOf(value) < first_negative
@@ -131,7 +133,8 @@ export function injectPositive(values: number[]): number[] {
             (currentTotal: number, num: number) => currentTotal + num,
             0
         );
-        values.splice(first_negative, 0, sum);
+        const new_values = [...values];
+        new_values.splice(first_negative + 1, 0, sum);
+        return new_values;
     }
-    return values;
 }
