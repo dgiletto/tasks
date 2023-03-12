@@ -225,7 +225,20 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map((question: Question): Question => {
+        if (question.id === targetId) {
+            let newOptions = [];
+            if (targetOptionIndex === -1) {
+                newOptions = [...question.options, newOption];
+            } else {
+                newOptions = [...question.options];
+                newOptions.splice(targetOptionIndex, 1, newOption);
+            }
+            return { ...question, options: newOptions };
+        } else {
+            return question;
+        }
+    });
 }
 
 /***
